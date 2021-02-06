@@ -1,0 +1,25 @@
+.player {
+  min-height: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 60%;
+  margin: auto;
+
+  .ranger {
+    width: 80%;
+    @include flex(center, space-around, row);
+    input {
+      width: 80%;
+    }
+  }
+  .controler {
+    width: 60%;
+    font-size: 5rem;
+    @include flex(center, space-around, row);
+    .svg-inline--fa:hover {
+      cursor: pointer;
+    }
+  }
+}

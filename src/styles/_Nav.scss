@@ -1,0 +1,23 @@
+nav {
+  min-height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 60%;
+  margin: auto;
+  button {
+    background-color: transparent;
+    border: 2px solid black;
+    color: black;
+    padding: 1.5rem 3rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.5rem;
+    &:hover {
+      cursor: pointer;
+      background: black;
+      color: white;
+    }
+  }
+}

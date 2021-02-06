@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import Nav from "./components/Nav";
+import Song from "./components/Song";
+import Player from "./components/Player";
+import chillHop from "./data";
+import { useState, useRef, useEffect } from "react";
 
-function App() {
+const App = () => {
+  const song = chillHop()[0];
+  const audioRef = useRef(null);
+
+  const [isPlaying, setIsPlaying] = useState(false);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Nav />
+      <Song song={song} isPlaying={isPlaying} />
+      <Player
+        audioRef={audioRef}
+        isPlaying={isPlaying}
+        setIsPlaying={setIsPlaying}
+      />
+      <audio src={song.audio} ref={audioRef}></audio>
     </div>
   );
-}
+};
 
 export default App;
