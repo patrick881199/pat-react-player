@@ -1,0 +1,46 @@
+.library-list {
+  width: 35rem;
+  height: 100vh;
+  box-shadow: 5px 5px 30px #d1d1d1;
+  background-color: white;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  transition: all 0.5s ease;
+  transform: translateX(-100%);
+  h4 {
+    font-size: 3rem;
+    font-weight: bold;
+    padding: 3rem 2rem;
+  }
+
+  ul li {
+    padding: 1.5rem 2rem;
+    @include flex(center, flex-start, row);
+    transition: all 0.5s ease;
+    img {
+      width: 30%;
+    }
+    .song-info {
+      margin-left: 1.5rem;
+      h5 {
+        font-size: 1.5rem;
+      }
+      p {
+        font-size: 1.2rem;
+        padding: 1rem 0rem;
+      }
+    }
+    &:hover {
+      background-color: rgb(179, 182, 228);
+      cursor: pointer;
+    }
+  }
+}
+
+.library-list-appear {
+  transform: translateX(0%);
+}
