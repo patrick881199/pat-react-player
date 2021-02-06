@@ -1,9 +1,17 @@
 import React from "react";
 
-const Library = ({ songs, hasLibraryList }) => {
+const Library = ({ songs, hasLibraryList, currentSong, setCurrentSong }) => {
+  const librarySongClickHandler = (song) => {
+    setCurrentSong(song);
+  };
   const songList = songs.map((song) => {
+    const highlight = song.id === currentSong.id;
+
     return (
-      <li>
+      <li
+        className={highlight ? "highlight" : ""}
+        onClick={() => librarySongClickHandler(song)}
+      >
         <img src={song.cover} alt="cover image" />
         <div className="song-info">
           <h5>{song.name}</h5>

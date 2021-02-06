@@ -6,12 +6,12 @@ import chillHop from "./data";
 import { useState, useRef, useEffect } from "react";
 
 const App = () => {
-  const songs = chillHop();
-  const currentSong = songs[0];
   const audioRef = useRef(null);
 
+  const [songs, setSongs] = useState(chillHop());
   const [isPlaying, setIsPlaying] = useState(false);
   const [hasLibraryList, setHasLibraryList] = useState(false);
+  const [currentSong, setCurrentSong] = useState(songs[0]);
 
   return (
     <div className="App">
@@ -25,7 +25,12 @@ const App = () => {
         isPlaying={isPlaying}
         setIsPlaying={setIsPlaying}
       />
-      <Library songs={songs} hasLibraryList={hasLibraryList} />
+      <Library
+        songs={songs}
+        hasLibraryList={hasLibraryList}
+        currentSong={currentSong}
+        setCurrentSong={setCurrentSong}
+      />
       <audio src={currentSong.audio} ref={audioRef}></audio>
     </div>
   );

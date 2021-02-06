@@ -9,7 +9,7 @@
   overflow-x: hidden;
   overflow-y: scroll;
   scrollbar-width: thin;
-  transition: all 0.5s ease;
+  transition: transform 0.5s ease;
   transform: translateX(-100%);
   h4 {
     font-size: 3rem;
@@ -43,4 +43,8 @@
 
 .library-list-appear {
   transform: translateX(0%);
+}
+
+.highlight {
+  background-color: rgb(179, 182, 228);
 }
