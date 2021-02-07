@@ -24,6 +24,18 @@ const App = () => {
     });
   };
 
+  const playNext = async () => {
+    const index = songs.findIndex((song) => {
+      return song.id === currentSong.id;
+    });
+    if (index < songs.length - 1) {
+      await setCurrentSong(songs[index + 1]);
+    } else {
+      await setCurrentSong(songs[0]);
+    }
+    audioRef.current.play();
+  };
+
   return (
     <div className="App">
       <Nav
@@ -37,17 +49,24 @@ const App = () => {
         audioRef={audioRef}
         isPlaying={isPlaying}
         setIsPlaying={setIsPlaying}
+        songs={songs}
+        currentSong={currentSong}
+        setCurrentSong={setCurrentSong}
       />
       <Library
+        audioRef={audioRef}
         songs={songs}
         hasLibraryList={hasLibraryList}
         currentSong={currentSong}
         setCurrentSong={setCurrentSong}
+        isPlaying={isPlaying}
+        setIsPlaying={setIsPlaying}
       />
       <audio
         src={currentSong.audio}
         ref={audioRef}
         onTimeUpdate={timeUpdateHandler}
+        onEnded={playNext}
       ></audio>
     </div>
   );

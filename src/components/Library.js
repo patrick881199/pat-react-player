@@ -1,8 +1,19 @@
 import React from "react";
 
-const Library = ({ songs, hasLibraryList, currentSong, setCurrentSong }) => {
-  const librarySongClickHandler = (song) => {
-    setCurrentSong(song);
+const Library = ({
+  songs,
+  hasLibraryList,
+  currentSong,
+  setCurrentSong,
+  isPlaying,
+  setIsPlaying,
+  audioRef,
+}) => {
+  const librarySongClickHandler = async (song) => {
+    await setCurrentSong(song);
+    if (isPlaying) {
+      audioRef.current.play();
+    }
   };
   const songList = songs.map((song) => {
     const highlight = song.id === currentSong.id;

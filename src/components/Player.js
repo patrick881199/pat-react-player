@@ -9,9 +9,12 @@ import {
 const Player = ({
   currentSongRangerInfo,
   setCurrentSongRangerInfo,
-  audioRef,
   isPlaying,
   setIsPlaying,
+  audioRef,
+  songs,
+  currentSong,
+  setCurrentSong,
 }) => {
   const playHandler = () => {
     if (isPlaying) {
@@ -20,6 +23,28 @@ const Player = ({
       audioRef.current.play();
     }
     setIsPlaying(!isPlaying);
+  };
+
+  const changeSongHandler = async (direction) => {
+    const index = songs.findIndex((song) => {
+      return song.id === currentSong.id;
+    });
+    if (direction === "forward") {
+      if (index < songs.length - 1) {
+        await setCurrentSong(songs[index + 1]);
+      } else {
+        await setCurrentSong(songs[0]);
+      }
+    } else {
+      if (index > 0) {
+        await setCurrentSong(songs[index - 1]);
+      } else {
+        await setCurrentSong(songs[songs.length - 1]);
+      }
+    }
+    if (isPlaying) {
+      audioRef.current.play();
+    }
   };
 
   const durationConverter = (duration) => {
@@ -54,14 +79,20 @@ const Player = ({
       </div>
 
       <div className="controler">
-        <FontAwesomeIcon icon={faBackward} />
+        <FontAwesomeIcon
+          icon={faBackward}
+          onClick={() => changeSongHandler("backward")}
+        />
         {isPlaying ? (
           <FontAwesomeIcon onClick={playHandler} icon={faPause} />
         ) : (
           <FontAwesomeIcon onClick={playHandler} icon={faPlay} />
         )}
 
-        <FontAwesomeIcon icon={faForward} />
+        <FontAwesomeIcon
+          icon={faForward}
+          onClick={() => changeSongHandler("forward")}
+        />
       </div>
     </div>
   );
