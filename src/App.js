@@ -67,6 +67,7 @@ const App = () => {
         ref={audioRef}
         onTimeUpdate={timeUpdateHandler}
         onEnded={playNext}
+        onLoadedMetadata={timeUpdateHandler}
       ></audio>
     </div>
   );

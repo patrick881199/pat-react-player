@@ -16,12 +16,12 @@ const Library = ({
     }
   };
   const songList = songs.map((song) => {
-    const highlight = song.id === currentSong.id;
+    song.active = song.id === currentSong.id;
 
     return (
       <li
         key={song.id}
-        className={highlight ? "highlight" : ""}
+        className={song.active ? "highlight" : ""}
         onClick={() => librarySongClickHandler(song)}
       >
         <img src={song.cover} alt="cover image" />
