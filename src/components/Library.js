@@ -9,6 +9,7 @@ const Library = ({ songs, hasLibraryList, currentSong, setCurrentSong }) => {
 
     return (
       <li
+        key={song.id}
         className={highlight ? "highlight" : ""}
         onClick={() => librarySongClickHandler(song)}
       >

@@ -6,12 +6,23 @@ import chillHop from "./data";
 import { useState, useRef, useEffect } from "react";
 
 const App = () => {
-  const audioRef = useRef(null);
+  const audioRef = useRef();
 
   const [songs, setSongs] = useState(chillHop());
   const [isPlaying, setIsPlaying] = useState(false);
   const [hasLibraryList, setHasLibraryList] = useState(false);
   const [currentSong, setCurrentSong] = useState(songs[0]);
+  const [currentSongRangerInfo, setCurrentSongRangerInfo] = useState({
+    currentTime: 0,
+    duration: "0:00",
+  });
+
+  const timeUpdateHandler = (e) => {
+    setCurrentSongRangerInfo({
+      currentTime: e.target.currentTime,
+      duration: e.target.duration,
+    });
+  };
 
   return (
     <div className="App">
@@ -21,6 +32,8 @@ const App = () => {
       />
       <Song currentSong={currentSong} isPlaying={isPlaying} />
       <Player
+        currentSongRangerInfo={currentSongRangerInfo}
+        setCurrentSongRangerInfo={setCurrentSongRangerInfo}
         audioRef={audioRef}
         isPlaying={isPlaying}
         setIsPlaying={setIsPlaying}
@@ -31,7 +44,11 @@ const App = () => {
         currentSong={currentSong}
         setCurrentSong={setCurrentSong}
       />
-      <audio src={currentSong.audio} ref={audioRef}></audio>
+      <audio
+        src={currentSong.audio}
+        ref={audioRef}
+        onTimeUpdate={timeUpdateHandler}
+      ></audio>
     </div>
   );
 };
