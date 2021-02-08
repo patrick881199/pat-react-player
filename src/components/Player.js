@@ -93,6 +93,7 @@ const Player = ({
 
         <div className="track-wrapper">
           <input
+            min={0}
             value={currentSongRangerInfo.currentTime}
             type="range"
             onChange={(e) => (audioRef.current.currentTime = e.target.value)}
