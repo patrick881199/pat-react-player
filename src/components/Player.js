@@ -18,6 +18,9 @@ const Player = ({
   test,
   setTest,
 }) => {
+  let percent =
+    (currentSongRangerInfo.currentTime / currentSongRangerInfo.duration) * 100;
+  percent = percent.toFixed(0);
   const playHandler = () => {
     if (isPlaying) {
       audioRef.current.pause();
@@ -87,12 +90,23 @@ const Player = ({
     <div className="player">
       <div className="ranger">
         <p>{durationConverter(currentSongRangerInfo.currentTime)}</p>
-        <input
-          value={currentSongRangerInfo.currentTime}
-          type="range"
-          onChange={(e) => (audioRef.current.currentTime = e.target.value)}
-          max={currentSongRangerInfo.duration}
-        />
+
+        <div className="track-wrapper">
+          <input
+            value={currentSongRangerInfo.currentTime}
+            type="range"
+            onChange={(e) => (audioRef.current.currentTime = e.target.value)}
+            max={currentSongRangerInfo.duration}
+          />
+          <div
+            style={{
+              backgroundImage: `linear-gradient(to right, ${currentSong.color[0]}, ${currentSong.color[1]})`,
+              transform: `translateX(-${100 - percent}%)`,
+            }}
+            className="colorful"
+          ></div>
+        </div>
+
         <p>{durationConverter(currentSongRangerInfo.duration)}</p>
       </div>
 
