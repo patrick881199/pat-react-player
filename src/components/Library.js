@@ -11,9 +11,6 @@ const Library = ({
 }) => {
   const librarySongClickHandler = async (song) => {
     await setCurrentSong(song);
-    if (isPlaying) {
-      audioRef.current.play();
-    }
   };
   const songList = songs.map((song) => {
     song.active = song.id === currentSong.id;

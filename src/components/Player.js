@@ -15,6 +15,8 @@ const Player = ({
   songs,
   currentSong,
   setCurrentSong,
+  test,
+  setTest,
 }) => {
   const playHandler = () => {
     if (isPlaying) {
@@ -42,10 +44,26 @@ const Player = ({
         await setCurrentSong(songs[songs.length - 1]);
       }
     }
-    if (isPlaying) {
-      audioRef.current.play();
-    }
   };
+
+  useEffect(() => {
+    if (isPlaying) {
+      const playPromise = audioRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then((_) => {
+            // Automatic playback started!
+            // Show playing UI.
+            console.log("audio played auto");
+          })
+          .catch((error) => {
+            // Auto-play was prevented
+            // Show paused UI.
+            console.log("playback prevented");
+          });
+      }
+    }
+  }, [currentSong]);
 
   const durationConverter = (duration) => {
     // Hours, minutes and seconds

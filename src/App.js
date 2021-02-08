@@ -17,10 +17,12 @@ const App = () => {
     duration: "0:00",
   });
 
+  const [test, setTest] = useState("hello");
+
   const timeUpdateHandler = (e) => {
     setCurrentSongRangerInfo({
       currentTime: e.target.currentTime,
-      duration: e.target.duration,
+      duration: e.target.duration ? e.target.duration : "0:00",
     });
   };
 
@@ -33,7 +35,6 @@ const App = () => {
     } else {
       await setCurrentSong(songs[0]);
     }
-    audioRef.current.play();
   };
 
   return (
@@ -52,6 +53,8 @@ const App = () => {
         songs={songs}
         currentSong={currentSong}
         setCurrentSong={setCurrentSong}
+        test={test}
+        setTest={setTest}
       />
       <Library
         audioRef={audioRef}
